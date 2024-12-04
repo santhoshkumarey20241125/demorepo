@@ -78,7 +78,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@equals(item().name,'SalesleProduct.txt')",
+						"value": "@equals(item().name,'SalesLTProduct (1).txt')",
 						"type": "Expression"
 					}
 				}
