@@ -136,13 +136,41 @@
 				"inputs": [
 					{
 						"referenceName": "DelimitedText6",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_filepath": {
+								"value": "@pipeline().parameters.s_filepath",
+								"type": "Expression"
+							},
+							"ds_directory": {
+								"value": "@pipeline().parameters.ss_directory",
+								"type": "Expression"
+							},
+							"ds_filename": {
+								"value": "@pipeline().parameters.s_filename",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "DelimitedText7",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_filepath": {
+								"value": "@pipeline().parameters.s_filepath",
+								"type": "Expression"
+							},
+							"ds_directory": {
+								"value": "@pipeline().parameters.ss_directory",
+								"type": "Expression"
+							},
+							"ds_filename": {
+								"value": "@pipeline().parameters.s_filename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
