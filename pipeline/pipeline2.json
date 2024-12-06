@@ -50,7 +50,21 @@
 				"inputs": [
 					{
 						"referenceName": "DelimitedText4",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_filepath": {
+								"value": "@pipeline().parameters.s_filepath",
+								"type": "Expression"
+							},
+							"ds_directory": {
+								"value": "@pipeline().parameters.ss_directory",
+								"type": "Expression"
+							},
+							"ds_filename": {
+								"value": "@pipeline().parameters.s_filename",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
@@ -61,29 +75,75 @@
 				]
 			},
 			{
-				"name": "Filter1",
-				"type": "Filter",
-				"dependsOn": [
-					{
-						"activity": "Copy data1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
 				"userProperties": [],
 				"typeProperties": {
-					"items": {
-						"value": "@activity('Copy data1').output",
-						"type": "Expression"
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
 					},
-					"condition": {
-						"value": "@equals(item().name,'SalesLTProduct (1).txt')",
-						"type": "Expression"
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText6",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DelimitedText7",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
+		"parameters": {
+			"s_filepath": {
+				"type": "String"
+			},
+			"ss_directory": {
+				"type": "String"
+			},
+			"s_filename": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
