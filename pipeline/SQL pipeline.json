@@ -54,7 +54,13 @@
 				"outputs": [
 					{
 						"referenceName": "DelimitedText8",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_color": {
+								"value": "@pipeline().parameters.color",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
