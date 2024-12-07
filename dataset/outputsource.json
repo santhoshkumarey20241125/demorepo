@@ -1,12 +1,18 @@
 {
-	"name": "DelimitedText8",
+	"name": "outputsource",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"ds_color": {
+			"ds_filepath": {
+				"type": "string"
+			},
+			"ds_outputdirectory": {
+				"type": "string"
+			},
+			"ds_filename": {
 				"type": "string"
 			}
 		},
@@ -16,11 +22,17 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@concat('sql_',dataset().ds_color,'file.txt')",
+					"value": "@dataset().ds_filename",
 					"type": "Expression"
 				},
-				"folderPath": "input",
-				"fileSystem": "project"
+				"folderPath": {
+					"value": "@dataset().ds_outputdirectory",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().ds_filepath",
+					"type": "Expression"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
