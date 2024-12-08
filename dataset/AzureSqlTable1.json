@@ -5,20 +5,11 @@
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"color": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "SalesLT",
-			"table": {
-				"value": "@dataset().color",
-				"type": "Expression"
-			}
+			"schema": "SalesLT"
 		}
 	}
 }
